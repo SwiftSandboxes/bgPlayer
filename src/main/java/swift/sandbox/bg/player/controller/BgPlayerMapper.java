@@ -6,7 +6,7 @@ import org.mapstruct.Mapper;
 import swift.sandbox.bg.player.model.BgPlayer;
 import swift.sandbox.bg.player.view.PlayerDto;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface BgPlayerMapper {
     // BgPlayerMapper INSTANCE = Mappers.getMapper(BgPlayerMapper.class);
 
