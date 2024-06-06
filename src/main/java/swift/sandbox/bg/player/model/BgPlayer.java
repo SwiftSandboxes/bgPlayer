@@ -1,14 +1,25 @@
 package swift.sandbox.bg.player.model;
 
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import org.springframework.data.annotation.Id;
 
-@RequiredArgsConstructor
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.Setter;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor
 public class BgPlayer {
 
     @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    @Getter
+    private Integer id;
 
     @Getter
     @NonNull

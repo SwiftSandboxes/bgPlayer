@@ -20,8 +20,10 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'mysql:mysql-connector-java:8.0.33'
-	implementation 'org.springframework.data:spring-data-jpa:3.3.0'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.mapstruct:mapstruct:1.5.5.Final'
+
+	runtimeOnly 'com.mysql:mysql-connector-j'
 
 	testImplementation 'net.datafaker:datafaker:2.2.1'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'

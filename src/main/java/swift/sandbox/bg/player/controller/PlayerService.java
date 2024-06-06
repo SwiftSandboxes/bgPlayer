@@ -7,12 +7,14 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import swift.sandbox.bg.player.model.BgPlayer;
+import swift.sandbox.bg.player.model.BgPlayerRepository;
 import swift.sandbox.bg.player.view.PlayerDto;
 
 @Service
 @RequiredArgsConstructor
 public class PlayerService {
     private final BgPlayerMapper bgPlayerMapper;
+    private final BgPlayerRepository playerRepository;
 
     public List<PlayerDto> getActivePlayers(String gameSessionId) {
         // TODO Auto-generated method stub
@@ -29,10 +31,10 @@ public class PlayerService {
 
     public PlayerDto createPlayer(PlayerDto player) {
         BgPlayer bgPlayer = bgPlayerMapper.toBgPlayer(player);
-        
-        //TODO do stuff to save to database
+ 
+        BgPlayer saved = playerRepository.save(bgPlayer);
 
-        return bgPlayerMapper.toDto(bgPlayer);
+        return bgPlayerMapper.toDto(saved);
     }
 
     public PlayerDto updatePlayer(PlayerDto player) {
