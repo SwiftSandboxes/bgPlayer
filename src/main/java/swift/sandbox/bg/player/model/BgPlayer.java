@@ -1,6 +1,7 @@
 package swift.sandbox.bg.player.model;
 
 import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -13,6 +14,7 @@ import jakarta.persistence.GenerationType;
 @Entity
 @NoArgsConstructor
 @RequiredArgsConstructor
+@AllArgsConstructor
 public class BgPlayer {
 
     @Id

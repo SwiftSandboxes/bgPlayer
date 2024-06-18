@@ -49,7 +49,8 @@ public class PlayerServiceTest {
         String givenName = "Bob";
         String surName = "Tester";
         PlayerDto pToCreate = PlayerDto.builder().givenName(givenName).surName(surName).build();
-        BgPlayer dbPlayer = new BgPlayer(1, givenName, surName);
+        BgPlayer dbPlayer = new BgPlayer(givenName, surName);
+        dbPlayer.setId(1);
         when(mockPlayerRepository.save(any(BgPlayer.class))).thenReturn(dbPlayer);
         
         PlayerDto savedPlayer = playerService.createPlayer(pToCreate);
