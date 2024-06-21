@@ -25,6 +25,10 @@ import swift.sandbox.bg.player.model.BgPlayerRepository;
 @Testcontainers
 class ServiceConnectionIntegrationTest {
 
+    private static final String TEST_USER_BASIC_PASS = "work";
+
+    private static final String TEST_USER_BASIC_NAME = "temporary";
+
     @Container
     @ServiceConnection
     static MySQLContainer<?> container = new MySQLContainer<>("mysql:latest");
@@ -50,6 +54,7 @@ class ServiceConnectionIntegrationTest {
         BgPlayer bgPlayer = byId.get();
 
         given().log().all()
+        .auth().basic(TEST_USER_BASIC_NAME, TEST_USER_BASIC_PASS)
         .when()
         .get("/player?playerId=1")
                 .then().log().all().statusCode(200);
