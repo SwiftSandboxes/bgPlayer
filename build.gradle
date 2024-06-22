@@ -16,6 +16,19 @@ repositories {
 	mavenCentral()
 }
 
+sourceSets {
+    integrationTest {
+        compileClasspath += sourceSets.main.output
+        runtimeClasspath += sourceSets.main.output
+        
+    }
+}
+
+configurations {
+    integrationTestImplementation.extendsFrom(testImplementation)
+    integrationTestRuntimeOnly.extendsFrom(testRuntimeOnly)
+}
+
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
@@ -24,7 +37,6 @@ dependencies {
 	implementation 'org.mapstruct:mapstruct:1.5.5.Final'
 
 	runtimeOnly 'com.mysql:mysql-connector-j'
-	// runtimeOnly 'org.postgresql:postgresql'
 
 	testImplementation 'net.datafaker:datafaker:2.2.1'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -32,28 +44,29 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-testcontainers'
 	testImplementation 'org.testcontainers:junit-jupiter'
 	testImplementation 'org.testcontainers:mysql'
-	// testImplementation("org.testcontainers:postgresql")
  
     annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
 
 	
 }
 
-// testing {
-//     suites {
-//         integrationTest(JvmTestSuite) {
-//             dependencies {
-//                 implementation project()
-//             }
-//         }
-//     }
-// }
-
-
 tasks.named('test') {
 	useJUnitPlatform()
 }
 
-// tasks.named('check') {
-//     dependsOn testing.suites.integrationTest
-// }
+tasks.register('integrationTest', Test) {
+    description = 'Runs integration tests.'
+    group = 'verification'
+
+    testClassesDirs = sourceSets.integrationTest.output.classesDirs
+    classpath = sourceSets.integrationTest.runtimeClasspath
+    shouldRunAfter test
+
+    useJUnitPlatform()
+
+    testLogging {
+        events "passed"
+    }
+}
+
+
